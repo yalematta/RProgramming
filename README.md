@@ -1,4 +1,4 @@
-# R-Programming
+# R Programming
 ###Second course in the Data Science Specialization on Coursera 
 
 - It focuses on the nuts and bolts of using R as a programming language. 
