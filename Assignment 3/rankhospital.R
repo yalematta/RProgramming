@@ -19,12 +19,12 @@ rankhospital <- function(state, outcome, num = "best"){
 		data <- subset(outcomedata, State == state)
 
 		if(identical(outcome, "heart attack"))
-			mortalityRate <- data[,13]
+			mortalityRate <- data[,11]
 
 		else if(identical(outcome, "heart failure"))
-			mortalityRate <- data[,19]
+			mortalityRate <- data[,17]
 
-		else mortalityRate <- data[,25]
+		else mortalityRate <- data[,23]
 		
 		mortalityRate <- as.numeric(mortalityRate)
 		hospitalName <- data[,2]
@@ -32,9 +32,10 @@ rankhospital <- function(state, outcome, num = "best"){
 		m1 <- matrix(hospitalName, length(hospitalName),1)
 		m2 <- matrix(mortalityRate, length(mortalityRate),1)
 		m <- data.frame(m1,m2)
-		m <- na.omit(m)
 
-		m <- m[order(m$m2, -rank(m$m1), decreasing = FALSE), ]
+		m <- m[order(m$m2, m$m1),]
+		m <- na.omit(m)
+		
 		rank <- matrix(1:nrow(m),nrow(m),1)
 		m <- cbind(m,rank)
 		colnames(m) <- c("Hospital.Name", "Rate", "Rank") 
